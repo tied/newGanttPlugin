@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.atlassian.cluster.monitoring:cluster-monitoring-spi:4.1.8">
+    <CLASSES>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/atlassian/cluster/monitoring/cluster-monitoring-spi/4.1.8/cluster-monitoring-spi-4.1.8.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/atlassian/cluster/monitoring/cluster-monitoring-spi/4.1.8/cluster-monitoring-spi-4.1.8-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/atlassian/cluster/monitoring/cluster-monitoring-spi/4.1.8/cluster-monitoring-spi-4.1.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

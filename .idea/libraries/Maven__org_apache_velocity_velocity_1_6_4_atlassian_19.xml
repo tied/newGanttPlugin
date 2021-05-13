@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.velocity:velocity:1.6.4-atlassian-19">
+    <CLASSES>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/org/apache/velocity/velocity/1.6.4-atlassian-19/velocity-1.6.4-atlassian-19.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/org/apache/velocity/velocity/1.6.4-atlassian-19/velocity-1.6.4-atlassian-19-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/org/apache/velocity/velocity/1.6.4-atlassian-19/velocity-1.6.4-atlassian-19-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

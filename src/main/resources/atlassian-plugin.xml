@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2"> 
+  <plugin-info> 
+    <description>${project.description}</description>  
+    <version>${project.version}</version>  
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>  
+    <param name="plugin-icon">images/pluginIcon.png</param>  
+    <param name="plugin-logo">images/pluginLogo.png</param> 
+  </plugin-info>  
+  <!-- add our i18n resource -->  
+  <!--resource type="i18n" name="i18n" location="newGanttPlugin"/-->
+  <!-- add our web resources -->
+  <resource type="i18n" name="i18n" location="newGanttPlugin"/>
+
+  <web-item key="gantt-entity" name="Gantt Entity" section="system.top.navigation.bar" weight="60">
+    <description key="gantt-entity.desc">Adds the "Gantt" action into menu</description>
+    <label key="Gantt"/>
+    <link linkId="gantt-entity">/secure/newGanttPlugin!default.jspa</link>
+  </web-item>
+<!--  <component-import key="issueManager" interface="com.atlassian.jira.issue.IssueManager" filter=""/>-->
+<!--  <component-import key="customFieldManager" interface="com.atlassian.jira.issue.CustomFieldManager" filter=""/>-->
+<!--  <component-import key="jiraAuthenticationContext" interface="com.atlassian.jira.security.JiraAuthenticationContext" filter=""/>-->
+
+  <web-resource key="newGanttPlugin-resources" name="newGanttPlugin Web Resources"> 
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <dependency>com.atlassian.plugin.newGanttPlugin:newGanttPlugin-resources</dependency>
+    <dependency>jira.webresources:jqlautocomplete</dependency>
+    <resource type="download" name="newGanttPlugin.css" location="/css/newGanttPlugin.css"/>
+    <resource type="download" name="newGanttPlugin.js" location="/js/newGanttPlugin.js"/>
+    <resource type="download" name="images/" location="/images"/>  
+    <context>gantt</context>
+  </web-resource>
+
+    <webwork1 key="gantt-page-webwork" >
+      <actions>
+      <action name="com.atlassian.plugin.action.MainAction" alias="newGanttPlugin">
+        <view name="input">/templates/Action.vm</view>
+      </action>
+      </actions>
+    </webwork1>
+
+  <rest key="gantt" path="/gantt" version="1.0" context="host-port">
+    <description>REST</description>
+  </rest>
+
+
+  <!--  <xwork key="gantt-web-works">-->
+<!--    <package name="newGanttPlugin" extends="default" namespace="/newGanttPlugin">-->
+<!--      <action name="main" class="com.atlassian.plugin.action.MainAction">-->
+<!--        <result name="success" type="velocity">/templates/Action.vm</result>-->
+<!--      </action>-->
+<!--    </package>-->
+<!--  </xwork>-->
+
+  <!--  <web-item name="gantt-entity" key="gantt-entity" section="system.user/user-content">-->
+  <!--    <description key="gantt-entity.desc">Adds the "Gantt" action into users's menu</description>-->
+  <!--    <label key="Гантт"/>-->
+  <!--    <link linkId="gantt-entity">/gantt/main.action</link>-->
+  <!--  </web-item>-->
+
+  <!--  <web-work1 key="gantt-page-webwork>" >-->
+  <!--    <action name="com.atlassian.plugin.action.MainAction" alias="newGanttPlugin">-->
+  <!--      <view name="input">/resources/templates/Action.vm</view>-->
+  <!--    </action>-->
+  <!--  </web-work1>-->
+
+  <!--    <servlet name="PluginServlet"-->
+  <!--             class="com.atlassian.plugin.servlet.PluginServlet"-->  
+  <!--             key="gantt">-->  
+  <!--        <description key="gantt.desc">A servlet for plugin</description>-->  
+  <!--        <url-pattern>/gantt</url-pattern>-->  
+  <!--    </servlet>-->  
+  <!--    <routing key="prettyurl-key" path="/secure">-->  
+  <!--        <route from="/PluginServlet.jspa" to="/plugins/servlet/gantt"/>-->  
+  <!--    </routing>-->  
+<!--  <rest key="plugin-rest" path="/plugin-rest" version="1.0"/>-->
+<!--  <servlet name="Gantt Servlet" i18n-name-key="gantt-servlet.name" key="gantt-servlet" class="com.atlassian.plugin.servlet.GanttServlet">-->
+<!--    <description key="gantt-servlet.description">The Gantt Servlet Plugin</description>-->
+<!--    <url-pattern>/ganttservlet</url-pattern>-->
+<!--  </servlet>-->
+
+<!--  <ao key="ao-module">-->
+<!--    <description>The module configuring the Active Objects service used by this plugin</description>-->
+<!--    <entity>com.atlassian.jira.ao.Task</entity>-->
+<!--    <entity>com.atlassian.jira.ao.Project</entity>-->
+<!--  </ao>-->
+
+<!--  <web-section name="main_section_1" location="admin_plugins_menu" weight="10" />-->
+
+<!--  <web-item key="my_links" name="Link on my main section" section="system.top.navigation.bar" weight="47">-->
+<!--    <label>Gantt plugin</label>-->
+<!--    <link linkId="my_links">http://localhost:2990/jira/plugins/servlet/ganttservlet</link>-->
+<!--  </web-item>-->
+
+<!--  <web-item key="website_link" name="Plugin Web Site" section="newGanttPlugin/newGanttPlugin_section" weight="10">-->
+<!--    <label>Web Site</label>-->
+<!--    <link linkId="website_link">http://localhost:2990/jira/plugins/servlet/ganttservlet</link>-->
+<!--  </web-item>-->
+
+<!--  <web-item key="documentation_link" name="Documentation Web Site" section="my_links/my_links_section" weight="10">-->
+<!--    <label>Documentation</label>-->
+<!--    <link linkId="documentation_link">http://confluence.atlassian.com</link>-->
+<!--  </web-item>-->
+
+<!--  <xwork key="gantt-web-works">-->
+<!--    <package name="plugin" extends="default" namespace="/gantt">-->
+<!--      <action name="main" class="com.atlassian.jira.action.MainAction">-->
+<!--        <result name="success" type="velocity">/templates/Main.vm</result>-->
+<!--      </action>-->
+<!--    </package>-->
+<!--  </xwork>-->
+
+<!--  <web-section key="key1" name="section1" location="system.top.navigation.bar">-->
+<!--    <label key="New admin menu button"></label>-->
+<!--  </web-section>-->
+
+<!--  <web-item key="key2" name="item1" section="section1" weight="10">-->
+<!--    <label key="key2"></label>-->
+<!--    <styleClass>custom-css-class</styleClass>-->
+<!--    <link linkId="key2">http://google1.com</link>-->
+<!--  </web-item>-->
+
+<!--  <web-resource key="gantt-resource" name="gantt-resource">-->
+<!--    <resource type="download" location="/css/newGanttPlugin.css/"></resource>-->
+<!--    <resource type="download" location="/js/newGanttPlugin.js/"></resource>-->
+<!--  </web-resource>-->
+
+</atlassian-plugin>

@@ -1,0 +1,21 @@
+<div class="aui-sidebar">
+    <div class="aui-sidebar-wrapper">
+        <div class="aui-sidebar-body">
+            <!-- AUI Navigation -->
+            <nav class="aui-navgroup aui-navgroup-vertical">
+                <div class="aui-navgroup-inner">
+                    <div class="aui-sidebar-group aui-sidebar-group-tier-one">
+                        <ul class="aui-nav" title="Page actions">
+                            <li>
+                                <a class="aui-nav-item" href="$baseurl/secure/newGanttPlugin!default.jspa" title="Главная страница">
+                                    <span class="aui-icon aui-icon-small aui-iconfont-home-filled"></span>
+                                    <span class="aui-nav-item-label">Главная</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div><!-- end AUI Sidebar -->

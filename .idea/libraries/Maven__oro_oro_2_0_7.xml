@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: oro:oro:2.0.7">
+    <CLASSES>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/oro/oro/2.0.7/oro-2.0.7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/oro/oro/2.0.7/oro-2.0.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/oro/oro/2.0.7/oro-2.0.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.squareup:tape:1.2.3-atlassian-5">
+    <CLASSES>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/squareup/tape/1.2.3-atlassian-5/tape-1.2.3-atlassian-5.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/squareup/tape/1.2.3-atlassian-5/tape-1.2.3-atlassian-5-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/squareup/tape/1.2.3-atlassian-5/tape-1.2.3-atlassian-5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

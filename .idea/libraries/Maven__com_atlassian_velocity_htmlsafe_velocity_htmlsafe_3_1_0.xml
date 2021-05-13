@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.atlassian.velocity.htmlsafe:velocity-htmlsafe:3.1.0">
+    <CLASSES>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/atlassian/velocity/htmlsafe/velocity-htmlsafe/3.1.0/velocity-htmlsafe-3.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/atlassian/velocity/htmlsafe/velocity-htmlsafe/3.1.0/velocity-htmlsafe-3.1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/atlassian/velocity/htmlsafe/velocity-htmlsafe/3.1.0/velocity-htmlsafe-3.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
