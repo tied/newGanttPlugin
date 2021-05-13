@@ -5,6 +5,7 @@ import com.atlassian.plugin.model.ProjectModel;
 import com.atlassian.plugin.model.TaskModel;
 import com.atlassian.plugin.service.ProjectService;
 import com.atlassian.plugin.service.TaskService;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

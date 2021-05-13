@@ -7,7 +7,7 @@ import com.atlassian.sal.api.search.SearchResults;
 import java.util.List;
 
 public interface TaskService {
-    List<TaskModel> getAllTasks();
+    List<TaskModel> getAllTasks() throws SearchException;
 
     TaskModel getTaskById(int id);
 }
