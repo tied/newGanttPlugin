@@ -35,5 +35,14 @@
                 </div>
             </nav>
         </div>
+        <div class="aui-sidebar-footer">
+            <a href="https://example.com" class="aui-button aui-button-subtle aui-sidebar-settings-button" title="Settings">
+                <span class="aui-icon aui-icon-small aui-iconfont-configure"></span>
+                <span class="aui-button-label">Settings</span>
+            </a>
+            <button class="aui-button aui-button-subtle aui-sidebar-toggle aui-sidebar-footer-tipsy" title="Collapse sidebar ( [ )">
+                <span class="aui-icon aui-icon-small aui-iconfont-chevron-double-left"></span>
+            </button>
+        </div>
     </div>
 </div><!-- end AUI Sidebar -->

@@ -23,8 +23,8 @@ public class TaskModel {
     private String end;
     @XmlElement
     private String author;
-    @XmlElement
-    private String type;
+//    @XmlElement
+//    private String type;
 
     public TaskModel() {}
 //    public TaskModel(IssueField issueField) {
@@ -72,7 +72,7 @@ public class TaskModel {
         return author;
     }
 
-    public String getType() { return type; }
+//    public String getType() { return type; }
 
     public void setId(Long id) {
         this.id = id;
@@ -98,5 +98,5 @@ public class TaskModel {
         this.author = author;
     }
 
-    public void setType(String type) { this.type = type; }
+//    public void setType(String type) { this.type = type; }
 }

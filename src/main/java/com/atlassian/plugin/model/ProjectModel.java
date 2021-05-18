@@ -13,6 +13,8 @@ public class ProjectModel {
     private Long id;
     @XmlElement
     private String name;
+    @XmlElement
+    private String description;
 
     public ProjectModel() {}
 
@@ -24,6 +26,8 @@ public class ProjectModel {
         return name;
     }
 
+    public String getDescription() { return description; }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -31,4 +35,6 @@ public class ProjectModel {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setDescription(String description) { this.description = description; }
 }

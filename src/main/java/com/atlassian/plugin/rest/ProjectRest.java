@@ -1,6 +1,7 @@
 package com.atlassian.plugin.rest;
 
 import com.atlassian.jira.issue.search.SearchException;
+import com.atlassian.jira.project.Project;
 import com.atlassian.plugin.model.ProjectModel;
 import com.atlassian.plugin.model.TaskModel;
 import com.atlassian.plugin.service.ProjectService;
@@ -28,9 +29,7 @@ public class ProjectRest {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getAllProjects")
-    public List<ProjectModel> getAllProjects() {
+    public List<ProjectModel>  getAllProjects() throws SearchException {
         return projectService.getAllProjects();
-//        List<ProjectModel> projectModels = new ArrayList<>();
-//        return projectModels;
     }
 }

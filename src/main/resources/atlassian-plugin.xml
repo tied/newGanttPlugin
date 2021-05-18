@@ -1,51 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2"> 
-  <plugin-info> 
-    <description>${project.description}</description>  
-    <version>${project.version}</version>  
-    <vendor name="${project.organization.name}" url="${project.organization.url}"/>  
-    <param name="plugin-icon">images/pluginIcon.png</param>  
-    <param name="plugin-logo">images/pluginLogo.png</param> 
-  </plugin-info>  
-  <!-- add our i18n resource -->  
-  <!--resource type="i18n" name="i18n" location="newGanttPlugin"/-->
-  <!-- add our web resources -->
-  <resource type="i18n" name="i18n" location="newGanttPlugin"/>
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+    <!-- add our i18n resource -->
+    <!--resource type="i18n" name="i18n" location="newGanttPlugin"/-->
+    <!-- add our web resources -->
+    <resource type="i18n" name="i18n" location="newGanttPlugin"/>
 
-  <web-item key="gantt-entity" name="Gantt Entity" section="system.top.navigation.bar" weight="60">
-    <description key="gantt-entity.desc">Adds the "Gantt" action into menu</description>
-    <label key="Gantt"/>
-    <link linkId="gantt-entity">/secure/newGanttPlugin!default.jspa</link>
-  </web-item>
+    <web-item key="gantt-entity" name="Gantt Entity" section="system.top.navigation.bar" weight="60">
+        <description key="gantt-entity.desc">Adds the "Gantt" action into menu</description>
+        <label key="Gantt"/>
+        <link linkId="gantt-entity">/secure/newGanttPlugin!default.jspa</link>
+    </web-item>
 
-  <web-resource key="newGanttPlugin-resources" name="newGanttPlugin Web Resources"> 
-    <dependency>com.atlassian.auiplugin:ajs</dependency>
-    <dependency>com.atlassian.plugin.newGanttPlugin:newGanttPlugin-resources</dependency>
-    <dependency>jira.webresources:jqlautocomplete</dependency>
-    <resource type="download" name="newGanttPlugin.css" location="/css/newGanttPlugin.css"/>
-    <resource type="download" name="newGanttPlugin.js" location="/js/newGanttPlugin.js"/>
-    <resource type="download" name="images/" location="/images"/>  
-    <context>gantt</context>
-  </web-resource>
+    <web-resource key="newGanttPlugin-resources" name="newGanttPlugin Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <dependency>jira.webresources:jqlautocomplete</dependency>
+        <dependency>com.atlassian.plugin.gantt:newGanttPlugin-resources</dependency>
+        <dependency>com.atlassian.plugin.newGanttPlugin:newGanttPlugin-resources</dependency>
+        <resource type="download" name="all.css" location="/css/gantt/all.css"/>
+        <resource type="download" name="newGanttPlugin.css" location="/css/newGanttPlugin.css"/>
+        <resource type="download" name="Gantt.css" location="/css/Gantt.css"/>
+<!--        <resource type="download" name="all.js" location="/js/gantt/all.js"/>-->
+        <resource type="download" name="newGanttPlugin.js" location="/js/newGanttPlugin.js"/>
+        <resource type="download" name="Tasks.js" location="/js/Tasks.js"/>
+        <resource type="download" name="Projects.js" location="/js/Projects.js"/>
+        <resource type="download" name="Gantt.js" location="/js/Gantt.js"/>
+        <resource type="download" name="images/" location="/images"/>
+        <context>gantt</context>
+    </web-resource>
 
-    <webwork1 key="gantt-page-webwork" >
-      <actions>
-      <action name="com.atlassian.plugin.action.MainAction" alias="newGanttPlugin">
-        <view name="input">/templates/Action.vm</view>
-      </action>
-        <action name="com.atlassian.plugin.action.MainAction" alias="newGanttPlugin1">
-          <view name="input">/templates/Projects.vm</view>
-        </action>
-        <action name="com.atlassian.plugin.action.MainAction" alias="newGanttPlugin2">
-          <view name="input">/templates/Gantt.vm</view>
-        </action>
-      </actions>
+    <webwork1 key="gantt-page-webwork">
+        <actions>
+            <action name="com.atlassian.plugin.action.MainAction" alias="newGanttPlugin">
+                <view name="input">/templates/Action.vm</view>
+            </action>
+            <action name="com.atlassian.plugin.action.ProjectAction" alias="newGanttPlugin1">
+                <view name="input">/templates/Projects.vm</view>
+            </action>
+            <action name="com.atlassian.plugin.action.GanttAction" alias="newGanttPlugin2">
+                <view name="input">/templates/Gantt.vm</view>
+            </action>
+            <action name="com.atlassian.plugin.action.TaskAction" alias="newGanttPlugin3">
+                <view name="input">/templates/Tasks.vm</view>
+            </action>
+        </actions>
     </webwork1>
 
-  <rest key="gantt" path="/gantt" version="1.0" context="host-port">
-    <description>REST</description>
-  </rest>
+    <rest key="gantt" path="/gantt" version="1.0" context="host:port">
+        <description>REST</description>
+    </rest>
 
 
 </atlassian-plugin>

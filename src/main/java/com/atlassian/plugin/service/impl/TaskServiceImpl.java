@@ -5,12 +5,17 @@ import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.search.SearchException;
+import com.atlassian.jira.issue.search.SearchResults;
 import com.atlassian.jira.jql.builder.JqlQueryBuilder;
+import com.atlassian.jira.project.Project;
+import com.atlassian.jira.project.ProjectManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.bean.PagerFilter;
 import com.atlassian.plugin.model.TaskModel;
 import com.atlassian.plugin.service.TaskService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import com.atlassian.query.Query;
+import com.atlassian.query.order.SortOrder;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,11 +26,15 @@ import java.util.List;
 public class TaskServiceImpl implements TaskService {
 
     @ComponentImport
-    private final IssueManager issueManager;
+    final IssueManager issueManager;
+
+    @ComponentImport
+    final ProjectManager projectManager;
 
     @Inject
-    public TaskServiceImpl(IssueManager issueManager) {
+    public TaskServiceImpl(IssueManager issueManager, ProjectManager projectManager) {
         this.issueManager = issueManager;
+        this.projectManager = projectManager;
     }
 
     @Override
@@ -37,35 +46,41 @@ public class TaskServiceImpl implements TaskService {
     public List<TaskModel> getAllTasks() throws SearchException {
 
         List<TaskModel> taskModels = new ArrayList<>();
-
         ApplicationUser user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser();
+        Project project = ComponentAccessor.getProjectManager().getProjectObj(10100L);
+//        Query query = JqlQueryBuilder.newBuilder()
+//                .where()
+//                .project().eq().string(project.getKey())
+//                .and()
+//                .issueType().eq().string("10000")
+//                .endWhere()
+//                .orderBy().add("Rank", SortOrder.ASC)
+//                .buildQuery();
+        Query query = JqlQueryBuilder.newBuilder()
+                .where()
+                .project().eq().string(project.getKey())
+                .and()
+                .issueType().isNotEmpty()
+                .endWhere()
+                .orderBy().add("Rank", SortOrder.ASC)
+                .buildQuery();
 
-        SearchService service = null;
+        List<Issue> issues = ComponentAccessor.getComponentOfType(SearchService.class).search(user, query, PagerFilter.getUnlimitedFilter()).getResults();
 
-        JqlQueryBuilder jqlQueryBuilder = JqlQueryBuilder.newBuilder();
-
-        jqlQueryBuilder.where().project().eq("PLUGIN-GANTT").issueType().eq("Task");
-//        service.search(user,
-//                jqlQueryBuilder.buildQuery(),
-//                PagerFilter.getUnlimitedFilter()).getResults();
-
-        for (Issue issue : service.search(user,
-                jqlQueryBuilder.buildQuery(),
-                PagerFilter.getUnlimitedFilter()).getResults()) {
+        for (Issue issue : issues) {
             TaskModel taskModel = new TaskModel();
             taskModel.setId(issue.getId());
             taskModel.setStatus(issue.getStatus().getDescription());
             taskModel.setName(issue.getSummary());
             taskModel.setBegin(issue.getCreated().toString());
-            taskModel.setEnd(issue.getDueDate().toString());
+            if (issue.getDueDate() != null) { taskModel.setEnd(issue.getDueDate().toString()); }
+            //taskModel.setEnd(issue.getDueDate() == null ?"" issue.getDueDate().toString());
             taskModel.setAuthor(issue.getReporter().getName());
-            taskModel.setType(issue.getIssueType().getName());
+//            taskModel.setType(issue.getIssueType().getName());
             taskModels.add(taskModel);
         }
-
-        System.out.println(taskModels);
-        System.out.println(2);
         return taskModels;
+   }
 
-    }
+
 }

@@ -1,94 +1,43 @@
-#* @vtlvariable name="action" type="com.atlassian.plugin.action.MainAction" *#
-####<p>Hello, World!</p>
-##
-##<html>
-##<head>
-##    $webResourceManager.requireResource("com.atlassian.plugin.gantt:newGanttPlugin-resources")
-##    $webResourceManager.requireResource("com.atlassian.auiplugin:aui-page-header")
-##    $webResourceManager.requireResource("com.atlassian.auiplugin:aui-sidebar")
-##    $webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-iconfont")
-##    #set($baseurl = $settingsManager.getGlobalSettings().getBaseUrl())
-##    #set($name = $action.getName())
-##</head>
-##
-##<header class="page-header">
-##    <div class="header-logo">
-##        <h1>БИБЛИОТЕКА</h1>
-##    </div>
-##    <hr>
-##</header>
-##
-##<section id="content" role="main">
-##    <!-- AUI Sidebar -->
-##    #parse("/templates/Sidebar.vm")
-##
-##    <div class="aui-page-panel">
-##        <div class="aui-page-panel-inner">
-##            <section class="aui-page-panel-content">
-##                <h2>КАТАЛОГ</h2>
-##                <div>Как пользоваться каталогом:</div>
-##                <ul>
-##                    <li>Произведите поиск искомой книги</li>
-##                    <li>Чтобы прочитать подробную информацию и взять/забронировать книгу нажмите в нужной строке "Подробнее"</li>
-##                </ul>
-##                <div class="dx-viewport demo-container">
-##                    <div id="gridContainer"></div>
-##                    <div class="options">
-##                        <div class="caption">Options</div>
-##                        <div class="option">
-##                            <span>Apply Filter</span>
-##                            <div id="useFilterApplyButton"></div>
-##                        </div>
-##                        <div class="option">
-##                            <div id="filterRow"></div>
-##                        </div>
-##                        <div class="option">
-##                            <div id="headerFilter"></div>
-##                        </div>
-##                    </div>
-##                </div>
-##            </section>
-##        </div>
-##    </div>
-##</section>
-##</html>
+#* @vtlvariable name="action" type="com.atlassian.plugin.action.ProjectAction" *#
 
-<html>
+$webResourceManager.requireResource("com.atlassian.plugin.newGanttPlugin:newGanttPlugin-resources")
+$webResourceManager.requireResource("com.atlassian.plugin.gantt:newGanttPlugin-resources")
+$webResourceManager.requireResource("com.atlassian.auiplugin:aui-page-header")
+$webResourceManager.requireResource("com.atlassian.auiplugin:aui-sidebar")
+$webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-iconfont")
+#set($baseurl = $settingsManager.getGlobalSettings().getBaseUrl())
+#set($name = $action.getName())
+
+<link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/20.2.7/css/dx-gantt.min.css">
+<script src="https://cdn3.devexpress.com/jslib/20.2.7/js/dx-gantt.min.js"></script>
+<!-- ... -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <!-- DevExtreme themes -->
 <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/20.2.7/css/dx.common.css">
 <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/20.2.7/css/dx.light.css">
+
 <!-- DevExtreme library -->
 <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/20.2.7/js/dx.all.js"></script>
 
-$webResourceManager.requireResource("com.atlassian.confluence.Library:Library-resources")
-$webResourceManager.requireResource("com.atlassian.auiplugin:message")
-$webResourceManager.requireResource("com.atlassian.auiplugin:aui-forms")
-$webResourceManager.requireResource("com.atlassian.auiplugin:aui-button")
-$webResourceManager.requireResource("com.atlassian.auiplugin:aui-select")
-$webResourceManager.requireResource("com.atlassian.auiplugin:aui-sidebar")
-$webResourceManager.requireResource("com.atlassian.auiplugin:aui-page-header")
-$webResourceManager.requireResource("com.atlassian.auiplugin:aui-form-validation")
-$webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-iconfont")
-$webResourceManager.requireResource("com.atlassian.auiplugin:aui-select2")
-#set($baseurl = $settingsManager.getGlobalSettings().getBaseUrl())
-
-
-##    <script>
-##        initAddBook()
-##    </script>
-
-    <div id="messaging"></div>
-
-    <header class="page-header">
-        ##        <div class="aui-message fadeout"></div>
-
-    </header>
+<script>
+    getAllProjects()
+</script>
 
     <section id="content" role="main">
         <!-- AUI Sidebar -->
         #parse("/templates/Sidebar.vm")
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <section class="aui-page-panel-content">
+                    <div class="text-main-page">
+                        <h2>Мои проекты</h2>
+                        <div class="dx-viewport demo-container">
+                            <div id="gridContainer-projects"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
 
     </section>
-</html>

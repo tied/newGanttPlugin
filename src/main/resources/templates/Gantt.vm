@@ -1,10 +1,12 @@
-#* @vtlvariable name="action" type="com.atlassian.plugin.action.MainAction" *#
+#* @vtlvariable name="action" type="com.atlassian.plugin.action.GanttAction" *#
 
 <html>
 <head>
     $webResourceManager.requireResource("com.atlassian.plugin.gantt:newGanttPlugin-resources")
+    $webResourceManager.requireResource("com.atlassian.plugin.newGanttPlugin:newGanttPlugin-resources")
     $webResourceManager.requireResource("com.atlassian.auiplugin:aui-page-header")
     $webResourceManager.requireResource("com.atlassian.auiplugin:aui-sidebar")
+    $webResourceManager.requireResource("com.atlassian.auiplugin:aui-button")
     $webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-iconfont")
     #set($baseurl = $settingsManager.getGlobalSettings().getBaseUrl())
     #set($name = $action.getName())
@@ -21,152 +23,157 @@
     <!-- DevExtreme library -->
     <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/20.2.7/js/dx.all.js"></script>
 </head>
-<body
-        class="dx-viewport">
-    ##    <h1>It works!</h1>
+<body class="dx-viewport">
 <section id="content" role="main">
     <!-- AUI Sidebar -->
-##    #parse("/templates/Sidebar.vm")
+    ##    #parse("/templates/Sidebar.vm")
 </section>
-##<div onclick="javascript:aaa()">hello</div>
-<div class="demo-container">
-    <div id="gantt">
-
+<div class="dx-viewport demo-container">
+    <div class="options">
+        <div class="caption">Options</div>
+        <div class="option">
+            <div id="preventContextMenuShowing"></div>
+        </div>
+        <div class="option">
+            <div id="customizeContextMenu"></div>
+        </div>
+    </div>
+    <div id="gantt"></div>
+    <div>
+        <button onclick="window.location.href='http://localhost:2990/jira/secure/newGanttPlugin1!default.jspa';">Вернуться к списку проектов</button>
+        <div id="gantt"></div>
     </div>
 </div>
 
-<script>
-    function aaa() {
-        console.log(1);}
-
-    let tasks = [{
-        'id': 1,
-        'parentId': 0,
-        'title': 'Software Development',
-        'start': new Date('2019-02-21T05:00:00.000Z'),
-        'end': new Date('2019-07-04T12:00:00.000Z'),
-        'progress': 31
-    }, {
-        'id': 2,
-        'parentId': 1,
-        'title': 'Scope',
-        'start': new Date('2019-02-21T05:00:00.000Z'),
-        'end': new Date('2019-02-26T09:00:00.000Z'),
-        'progress': 60
-    }, {
-        'id': 3,
-        'parentId': 2,
-        'title': 'Determine project scope',
-        'start': new Date('2019-02-21T05:00:00.000Z'),
-        'end': new Date('2019-02-21T09:00:00.000Z'),
-        'progress': 100
-    }, {
-        'id': 4,
-        'parentId': 2,
-        'title': 'Secure project sponsorship',
-        'start': new Date('2019-02-21T10:00:00.000Z'),
-        'end': new Date('2019-02-22T09:00:00.000Z'),
-        'progress': 100
-    }, {
-        'id': 5,
-        'parentId': 2,
-        'title': 'Define preliminary resources',
-        'start': new Date('2019-02-22T10:00:00.000Z'),
-        'end': new Date('2019-02-25T09:00:00.000Z'),
-        'progress': 60
-    }
-    ];
-
-    var dependencies = [{
-        "id": 1,
-        "predecessorId": 3,
-        "successorId": 4,
-        "type": 0
-    }, {
-        "id": 2,
-        "predecessorId": 4,
-        "successorId": 5,
-        "type": 0
-    }, {
-        "id": 3,
-        "predecessorId": 5,
-        "successorId": 6,
-        "type": 0
-    }, {
-        "id": 4,
-        "predecessorId": 6,
-        "successorId": 7,
-        "type": 0
-    }, {
-        "id": 5,
-        "predecessorId": 7,
-        "successorId": 9,
-        "type": 0
-    }];
-
-    var resources = [{
-        'id': 1,
-        'text': 'Management'
-    }, {
-        'id': 2,
-        'text': 'Project Manager'
-    }, {
-        'id': 3,
-        'text': 'Analyst'
-    }, {
-        'id': 4,
-        'text': 'Developer'
-    }, {
-        'id': 5,
-        'text': 'Testers'
-    }];
-    $(function() {
-        $('#gantt').dxGantt({
-            tasks: {
-                dataSource: tasks
-            },
-            dependencies: {
-                dataSource: dependencies
-            },
-            resources: {
-                dataSource: resources
-            },
-            editing: {
-                enabled: true
-            },
-            validation: {
-                autoUpdateParentTasks: true
-            },
-            toolbar: {
-                items: [
-                    "undo",
-                    "redo",
-                    "separator",
-                    "collapseAll",
-                    "expandAll",
-                    "separator",
-                    "addTask",
-                    "deleteTask",
-                    "separator",
-                    "zoomIn",
-                    "zoomOut"
-                ]
-            },
-            columns: [{
-                dataField: "title",
-                caption: "Subject",
-                width: 300
-            }, {
-                dataField: "start",
-                caption: "Start Date"
-            }, {
-                dataField: "end",
-                caption: "End Date"
-            }],
-            scaleType: "weeks",
-            taskListWidth: 500
-        });
-    });
-</script>
+##<script>
+##    let tasks = [{
+##        'id': 1,
+##        'parentId': 0,
+##        'title': 'Software Development',
+##        'start': new Date('2019-02-21T05:00:00.000Z'),
+##        'end': new Date('2019-07-04T12:00:00.000Z'),
+##        'progress': 31
+##    }, {
+##        'id': 2,
+##        'parentId': 1,
+##        'title': 'Scope',
+##        'start': new Date('2019-02-21T05:00:00.000Z'),
+##        'end': new Date('2019-02-26T09:00:00.000Z'),
+##        'progress': 60
+##    }, {
+##        'id': 3,
+##        'parentId': 2,
+##        'title': 'Determine project scope',
+##        'start': new Date('2019-02-21T05:00:00.000Z'),
+##        'end': new Date('2019-02-21T09:00:00.000Z'),
+##        'progress': 100
+##    }, {
+##        'id': 4,
+##        'parentId': 2,
+##        'title': 'Secure project sponsorship',
+##        'start': new Date('2019-02-21T10:00:00.000Z'),
+##        'end': new Date('2019-02-22T09:00:00.000Z'),
+##        'progress': 100
+##    }, {
+##        'id': 5,
+##        'parentId': 2,
+##        'title': 'Define preliminary resources',
+##        'start': new Date('2019-02-22T10:00:00.000Z'),
+##        'end': new Date('2019-02-25T09:00:00.000Z'),
+##        'progress': 60
+##    }
+##    ];
+##
+##    var dependencies = [{
+##        "id": 1,
+##        "predecessorId": 3,
+##        "successorId": 4,
+##        "type": 0
+##    }, {
+##        "id": 2,
+##        "predecessorId": 4,
+##        "successorId": 5,
+##        "type": 0
+##    }, {
+##        "id": 3,
+##        "predecessorId": 5,
+##        "successorId": 6,
+##        "type": 0
+##    }, {
+##        "id": 4,
+##        "predecessorId": 6,
+##        "successorId": 7,
+##        "type": 0
+##    }, {
+##        "id": 5,
+##        "predecessorId": 7,
+##        "successorId": 9,
+##        "type": 0
+##    }];
+##
+##    var resources = [{
+##        'id': 1,
+##        'text': 'Management'
+##    }, {
+##        'id': 2,
+##        'text': 'Project Manager'
+##    }, {
+##        'id': 3,
+##        'text': 'Analyst'
+##    }, {
+##        'id': 4,
+##        'text': 'Developer'
+##    }, {
+##        'id': 5,
+##        'text': 'Testers'
+##    }];
+##    $(function() {
+##        $('#gantt').dxGantt({
+##            tasks: {
+##                dataSource: tasks
+##            },
+##            dependencies: {
+##                dataSource: dependencies
+##            },
+##            resources: {
+##                dataSource: resources
+##            },
+##            editing: {
+##                enabled: true
+##            },
+##            validation: {
+##                autoUpdateParentTasks: true
+##            },
+##            toolbar: {
+##                items: [
+##                    "undo",
+##                    "redo",
+##                    "separator",
+##                    "collapseAll",
+##                    "expandAll",
+##                    "separator",
+##                    "addTask",
+##                    "deleteTask",
+##                    "separator",
+##                    "zoomIn",
+##                    "zoomOut"
+##                ]
+##            },
+##            columns: [{
+##                dataField: "title",
+##                caption: "Subject",
+##                width: 300
+##            }, {
+##                dataField: "start",
+##                caption: "Start Date"
+##            }, {
+##                dataField: "end",
+##                caption: "End Date"
+##            }],
+##            scaleType: "weeks",
+##            taskListWidth: 500
+##        });
+##    });
+##</script>
 </body>
 </html>
