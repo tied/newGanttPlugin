@@ -38,4 +38,14 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return projectModels;
     }
+
+    @Override
+    public ProjectModel getProjectById(String id) {
+        Project project = projectManager.getProjectByCurrentKeyIgnoreCase(id);
+        ProjectModel projectModel = new ProjectModel();
+        projectModel.setId(project.getId());
+        projectModel.setName(project.getName());
+        projectModel.setDescription(project.getDescription());
+        return projectModel;
+    }
 }

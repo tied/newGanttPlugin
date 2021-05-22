@@ -41,19 +41,13 @@ $webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-ic
                 <h2>Список задач проекта</h2>
                 <div class="dx-viewport demo-container">
                     <div id="gridContainer-tasks"></div>
-##                    <div class="options">
-##                        <div class="caption">Options</div>
-##                        <div class="option">
-##                            <span>Apply Filter</span>
-##                            <div id="useFilterApplyButton"></div>
-##                        </div>
-####                        <div class="option">
-####                            <div id="filterRow"></div>
-####                        </div>
-####                        <div class="option">
-####                            <div id="headerFilter"></div>
-####                        </div>
-##                    </div>
+                    <div>
+                        <button class="aui-button aui-button-primary" onclick="window.location.href='http://localhost:2990/jira/secure/newGanttPlugin2!default.jspa';">Построить диаграмму Ганта</button>
+                        <div id="gridContainer-tasks"></div>
+                    </div>
+                    <div class="option">
+                        <div id="notShowAttributes"></div>
+                    </div>
                 </div>
             </section>
         </div>

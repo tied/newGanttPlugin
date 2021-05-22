@@ -44,7 +44,8 @@ $webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-ic
         <div class="aui-page-panel-inner">
             <section class="aui-page-panel-content">
                 <div class="text-main-page">
-                    <h2>Добро пожаловать!</h2>
+                    <div id="mainpage"></div>
+                        <h2>Добро пожаловать!</h2>
                 </div>
             </section>
         </div>

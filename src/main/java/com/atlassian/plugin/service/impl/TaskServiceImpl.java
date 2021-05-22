@@ -1,9 +1,12 @@
 package com.atlassian.plugin.service.impl;
 
+import com.atlassian.jira.bc.issue.IssueService;
 import com.atlassian.jira.bc.issue.search.SearchService;
 import com.atlassian.jira.component.ComponentAccessor;
+import com.atlassian.jira.exception.CreateException;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.issue.issuetype.IssueType;
 import com.atlassian.jira.issue.search.SearchException;
 import com.atlassian.jira.issue.search.SearchResults;
 import com.atlassian.jira.jql.builder.JqlQueryBuilder;
@@ -42,12 +45,25 @@ public class TaskServiceImpl implements TaskService {
         return null;
     }
 
+//    @Override
+//    public Issue addIssue(String name, String begin, String end) throws CreateException {
+//
+//        TaskModel taskModel = new TaskModel();
+//        taskModel.setName(name);
+//        taskModel.setBegin(begin);
+//        taskModel.setEnd(end);
+//        Issue issue = null;
+//        ApplicationUser user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser();
+//        Project project = ComponentAccessor.getProjectManager().getProjectObj(10100L);
+//        IssueInputB
+//    }
+
     @Override
     public List<TaskModel> getAllTasks() throws SearchException {
 
         List<TaskModel> taskModels = new ArrayList<>();
         ApplicationUser user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser();
-        Project project = ComponentAccessor.getProjectManager().getProjectObj(10100L);
+        Project project = ComponentAccessor.getProjectManager().getProjectObj(10000L);
 //        Query query = JqlQueryBuilder.newBuilder()
 //                .where()
 //                .project().eq().string(project.getKey())
@@ -70,11 +86,11 @@ public class TaskServiceImpl implements TaskService {
         for (Issue issue : issues) {
             TaskModel taskModel = new TaskModel();
             taskModel.setId(issue.getId());
-            taskModel.setStatus(issue.getStatus().getDescription());
-            taskModel.setName(issue.getSummary());
-            taskModel.setBegin(issue.getCreated().toString());
+            taskModel.setStatus(issue.getStatus().getStatusCategory().getName());
+            taskModel.setTitle(issue.getSummary());
+            taskModel.setStart(issue.getCreated().toString());
             if (issue.getDueDate() != null) { taskModel.setEnd(issue.getDueDate().toString()); }
-            //taskModel.setEnd(issue.getDueDate() == null ?"" issue.getDueDate().toString());
+            taskModel.setParentId(issue.getParentId());
             taskModel.setAuthor(issue.getReporter().getName());
 //            taskModel.setType(issue.getIssueType().getName());
             taskModels.add(taskModel);

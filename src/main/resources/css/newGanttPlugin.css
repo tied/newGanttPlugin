@@ -1,3 +1,7 @@
 #content {
     background-color: antiquewhite;
 }
+
+.aui-page-panel-inner {
+    height: 500px;
+}

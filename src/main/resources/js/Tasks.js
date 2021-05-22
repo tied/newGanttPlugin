@@ -1,7 +1,7 @@
 function getAllTasks() {
     AJS.$.ajax({
         type: "GET",
-        url: "/jira/rest/gantt/1.0/project/getAllTasks",
+        url: "/jira/rest/gantt/1.0/task/getAllTasks",
         dataType: "json",
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(errorThrown)
@@ -43,23 +43,22 @@ function fillTableForTasks(tasks) {
                 width: 80,
                 allowHeaderFiltering: true,
                 allowSearch: false
+            },{
+                caption: "Статус задачи",
+                dataField: "status",
+                width: 80,
+                allowHeaderFiltering: true,
+                allowSearch: false
             }, {
                 caption: "Название задачи",
-                dataField: "name",
+                dataField: "title",
                 allowHeaderFiltering: false,
                 headerFilter: {
                     allowSearch: true
                 }
             }, {
-                caption: "Автор",
-                dataField: "author",
-                width: 200,
-                headerFilter: {
-                    allowSearch: false
-                }
-            }, {
                 caption: "Дата создания",
-                dataField: "begin",
+                dataField: "start",
                 width: 200,
                 headerFilter: {
                     allowSearch: false
@@ -67,6 +66,13 @@ function fillTableForTasks(tasks) {
             }, {
                 caption: "Дата завершения",
                 dataField: "end",
+                width: 200,
+                headerFilter: {
+                    allowSearch: false
+                }
+            }, {
+                caption: "Автор",
+                dataField: "author",
                 width: 200,
                 headerFilter: {
                     allowSearch: false
@@ -106,6 +112,16 @@ function fillTableForTasks(tasks) {
             dataGrid.option("filterRow.applyFilter", data.value);
         }
     }).dxSelectBox("instance");
+
+    $("#notShowAttributes").dxCheckBox({
+        text: "Отключить показ атрибутов",
+        value: true,
+        onValueChanged: function (data) {
+                    dataGrid.clearFilter();
+                    dataGrid.option("filterRow.visible", data.value);
+                    applyFilterModeEditor.option("disabled", !data.value);
+                }
+    })
 
     // $("#filterRow").dxCheckBox({
     //     text: "Filter Row",

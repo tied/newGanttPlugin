@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -16,15 +18,15 @@ public class TaskModel {
     @XmlElement
     private String status;
     @XmlElement
-    private String name;
+    private String title;
     @XmlElement
-    private String begin;
+    private String start;
     @XmlElement
     private String end;
     @XmlElement
     private String author;
-//    @XmlElement
-//    private String type;
+    @XmlElement
+    private Long parentId;
 
     public TaskModel() {}
 //    public TaskModel(IssueField issueField) {
@@ -56,12 +58,13 @@ public class TaskModel {
         return status;
     }
 
-    public String getName() {
-        return name;
+
+    public String getTitle() {
+        return title;
     }
 
-    public String getBegin() {
-        return begin;
+    public String getStart() {
+        return start;
     }
 
     public String getEnd() {
@@ -72,7 +75,9 @@ public class TaskModel {
         return author;
     }
 
-//    public String getType() { return type; }
+    public Long getParentId() {
+        return parentId;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -82,12 +87,13 @@ public class TaskModel {
         this.status = status;
     }
 
-    public void setName(String name) {
-        this.name = name;
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setBegin(String begin) {
-        this.begin = begin;
+    public void setStart(String start) {
+        this.start = start;
     }
 
     public void setEnd(String end) {
@@ -98,5 +104,7 @@ public class TaskModel {
         this.author = author;
     }
 
-//    public void setType(String type) { this.type = type; }
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
 }

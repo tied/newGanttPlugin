@@ -1,5 +1,6 @@
 package com.atlassian.plugin.service;
 
+import com.atlassian.jira.exception.CreateException;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.search.SearchException;
 import com.atlassian.jira.issue.search.SearchResults;
@@ -13,4 +14,6 @@ public interface TaskService {
     List<TaskModel> getAllTasks() throws SearchException;
 
     TaskModel getTaskById(int id);
+
+//    Issue addIssue() throws CreateException;
 }

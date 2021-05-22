@@ -23,14 +23,6 @@ function fillTableForProjects(projects) {
             visible: true,
             applyFilter: "auto"
         },
-        // searchPanel: {
-        //     visible: false,
-        //     width: 240,
-        //     placeholder: "Поиск..."
-        // },
-        // headerFilter: {
-        //     visible: true
-        // },
         onRowPrepared: function (e) {
             if (e.rowType === "data" && e.rowIndex % 2 === 0) {
                 e.rowElement.css("background-color", "#bfbfbf58");
@@ -42,11 +34,11 @@ function fillTableForProjects(projects) {
                 dataField: "id",
                 width: 80,
                 allowHeaderFiltering: true,
-                allowSearch: false
+                allowSearch: true
             }, {
                 caption: "Название проекта",
                 dataField: "name",
-                allowHeaderFiltering: false,
+                allowHeaderFiltering: true,
                 headerFilter: {
                     allowSearch: true
                 }
@@ -61,10 +53,20 @@ function fillTableForProjects(projects) {
             {
                 type: "buttons",
                 buttons: [{
-                    text: "Подробнее",
+                    text: "Посмотреть подробную информацию о проекте",
                     onClick: function (e) {
                         var projectId = e.row.data.id
                         window.location.href = '/jira/projects/projectId/issues'; //id=' + bookId;
+                    }
+                }]
+            },
+            {
+                type: "buttons",
+                buttons: [{
+                    text: "Перейти к списку задач",
+                    onClick: function (e) {
+                        var projectId = e.row.data.id
+                        window.location.href = '/jira/secure/newGanttPlugin3!default.jspa'; //id=' + bookId;
                     }
                 }]
             }

@@ -24,9 +24,12 @@
         <dependency>jira.webresources:jqlautocomplete</dependency>
         <dependency>com.atlassian.plugin.gantt:newGanttPlugin-resources</dependency>
         <dependency>com.atlassian.plugin.newGanttPlugin:newGanttPlugin-resources</dependency>
-        <resource type="download" name="all.css" location="/css/gantt/all.css"/>
+<!--        <resource type="download" name="all.css" location="/css/gantt/all.css"/>-->
         <resource type="download" name="newGanttPlugin.css" location="/css/newGanttPlugin.css"/>
         <resource type="download" name="Gantt.css" location="/css/Gantt.css"/>
+        <resource type="download" name="Action.css" location="/css/Action.css"/>
+        <resource type="download" name="Projects.css" location="/css/Projects.css"/>
+        <resource type="download" name="Tasks.css" location="/css/Tasks.css"/>
 <!--        <resource type="download" name="all.js" location="/js/gantt/all.js"/>-->
         <resource type="download" name="newGanttPlugin.js" location="/js/newGanttPlugin.js"/>
         <resource type="download" name="Tasks.js" location="/js/Tasks.js"/>

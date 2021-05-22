@@ -11,5 +11,5 @@ import java.util.List;
 public interface ProjectService {
     List<ProjectModel>  getAllProjects() throws SearchException;
 
-    //ProjectModel getProjectById(String id);
+    ProjectModel getProjectById(String id);
 }

@@ -1,5 +1,36 @@
+/*#gantt {*/
+/*    height: 500px;*/
+/*}*/
+
+/*.options {*/
+/*    margin-bottom: 20px;*/
+/*    padding: 20px;*/
+/*    background-color: rgba(191, 191, 191, 0.15);*/
+/*    position: relative;*/
+/*}*/
+
+/*.caption {*/
+/*    font-size: 18px;*/
+/*    font-weight: 500;*/
+/*}*/
+
+/*.option {*/
+/*    margin-top: 10px;*/
+/*    margin-right: 40px;*/
+/*    display: inline-block;*/
+/*}*/
+
+/*.option:last-child {*/
+/*    margin-right: 0;*/
+/*}*/
+
+/*.aui-button {*/
+/*    color: aliceblue;*/
+/*}*/
+
+/***************************************************************/
 #gantt {
-    height: 700px;
+    height: 500px;
 }
 
 .options {
@@ -22,4 +53,34 @@
 
 .option:last-child {
     margin-right: 0;
+}
+
+.custom-task-edit-tooltip {
+    background-color: white;
+    color: black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px 12px 12px 12px;
+    border-radius: 3px;
+}
+
+.custom-task-edit-tooltip::before {
+    border-top-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.custom-task-edit-tooltip::after {
+    border-bottom-color: white;
+}
+
+.custom-tooltip-title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding-bottom: 6px;
+}
+
+.custom-tooltip-row {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
 }
