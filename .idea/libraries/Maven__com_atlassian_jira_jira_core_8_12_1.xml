@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.atlassian.jira:jira-core:8.12.1">
     <CLASSES>
-      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/atlassian/jira/jira-core/8.12.1/jira-core-8.12.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/atlassian/jira/jira-core/8.12.1/jira-core-8.12.1.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/atlassian/jira/jira-core/8.12.1/jira-core-8.12.1-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/atlassian/jira/jira-core/8.12.1/jira-core-8.12.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/com/atlassian/jira/jira-core/8.12.1/jira-core-8.12.1-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/atlassian/jira/jira-core/8.12.1/jira-core-8.12.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

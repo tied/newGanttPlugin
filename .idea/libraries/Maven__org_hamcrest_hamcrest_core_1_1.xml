@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: carol:carol:1.5.2">
+  <library name="Maven: org.hamcrest:hamcrest-core:1.1">
     <CLASSES>
-      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/carol/carol/1.5.2/carol-1.5.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/carol/carol/1.5.2/carol-1.5.2-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://C:/Applications/Atlassian/atlassian-plugin-sdk-8.2.6/repository/carol/carol/1.5.2/carol-1.5.2-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
