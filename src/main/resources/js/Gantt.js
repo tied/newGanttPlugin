@@ -1,6 +1,8 @@
 $(function() {
     var gantt = $("#gantt").dxGantt({
         taskTitlePosition: "outside",
+        taskStatusPosition: "outside",
+        taskAuthorPosition: "outside",
         scaleType: "months",
         tasks: {
             dataSource: tasks,
@@ -62,6 +64,30 @@ $(function() {
         }
     });
 
+    $("#statusPosition").dxSelectBox({
+        items: [
+            "inside",
+            "outside",
+            "none"
+        ],
+        value: "outside",
+        onValueChanged: function (e) {
+            gantt.option("taskStatusPosition", e.value);
+        }
+    });
+
+    $("#authorPosition").dxSelectBox({
+        items: [
+            "inside",
+            "outside",
+            "none"
+        ],
+        value: "outside",
+        onValueChanged: function (e) {
+            gantt.option("taskAuthorPosition", e.value);
+        }
+    });
+
     $("#showResources").dxCheckBox({
         text: "Show Resources",
         value: true,
@@ -78,6 +104,45 @@ $(function() {
                 : gantt.option("taskTooltipContentTemplate", undefined);
         }
     });
+
+    // $("#exportChartToPdf").dxButton({
+    //     text: "Export chart to PDF"
+    // })
+
+    // $('#downloadPdf').click(function(event) {
+    //     // get size of report page
+    //     var reportPageHeight = $('#reportPage').innerHeight();
+    //     var reportPageWidth = $('#reportPage').innerWidth();
+    //
+    //     // create a new canvas object that we will populate with all other canvas objects
+    //     var pdfCanvas = $('<canvas />').attr({
+    //         id: "canvaspdf",
+    //         width: reportPageWidth,
+    //         height: reportPageHeight
+    //     });
+    //
+    //     // keep track canvas position
+    //     var pdfctx = $(pdfCanvas)[0].getContext('2d');
+    //     var pdfctxX = 0;
+    //     var pdfctxY = 0;
+    //     var buffer = 100;
+    //
+    //     // for each chart.js chart
+    //     $("canvas").each(function(index) {
+    //         // get the chart height/width
+    //         var canvasHeight = $(this).innerHeight();
+    //         var canvasWidth = $(this).innerWidth();
+    //
+    //         // draw the chart into the new canvas
+    //         pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+    //         pdfctxX += canvasWidth + buffer;
+    //
+    //         // our report page is in a grid pattern so replicate that in the new canvas
+    //         if (index % 2 === 1) {
+    //             pdfctxX = 0;
+    //             pdfctxY += canvasHeight + buffer;
+    //         }
+    //     });
 
     function getTaskTooltipContentTemplate(task, container) {
         var timeEstimate = Math.abs(task.start - task.end) / 36e5;
@@ -487,143 +552,138 @@ var resourceAssignments = [{
 
 
 
-////какой-то код
-// You can create the Gantt widget using the following code.
-// Read more at https://js.devexpress.com/Documentation/Guide/Widgets/Common/Advanced/3rd-Party_Frameworks_Integration_API/#Create_and_Configure_a_Widget.
+///////////////////////////////////////////
+var resources = [{
+    'id': 1,
+    'text': 'Открыто'
+}, {
+    'id': 2,
+    'text': 'Закрыто'
+}, {
+    'id': 3,
+    'text': 'В работе'
+}, {
+    'id': 4,
+    'text': 'Блокировано'
+}, {
+    'id': 5,
+    'text': 'На проверке'
+}, {
+    'id': 6,
+    'text': 'Неактуально'
+}, {
+    'id': 7,
+    'text': ''
+}]
 
+jQuery.ajax({
+    dataType: "json",
+    type: 'get',
+    url: AJS.contextPath() + '/rest/gantt/1.0/task/getAllTasks',
+    async:false
+}).done(function(data){
 
+    var newData = getData(data.data, [], 0, [], -1)
+    var tasks = newData[1]
+    var resourceAssignments = newData[0]
 
-///////код вики
-// var resources = [{
-//     'id': 1,
-//     'text': 'Открыто'
-// }, {
-//     'id': 2,
-//     'text': 'Закрыто'
-// }, {
-//     'id': 3,
-//     'text': 'В работе'
-// }, {
-//     'id': 4,
-//     'text': 'Блокировано'
-// }, {
-//     'id': 5,
-//     'text': 'На проверке'
-// }, {
-//     'id': 6,
-//     'text': 'Неактуально'
-// }, {
-//     'id': 7,
-//     'text': ''
-// }]
-//
-// jQuery.ajax({
-//     dataType: "json",
-//     type: 'get',
-//     url: AJS.contextPath() + '/rest/gantt/1.0/task/getAllTasks',
-//     async:false
-// }).done(function(data){
-//
-//     var newData = getData(data.data, [], 0, [], -1)
-//     var tasks = newData[1]
-//     var resourceAssignments = newData[0]
-//
-//     var gantt = $("#gantt").dxGantt({
-//         tasks: {
-//             dataSource: tasks
-//         },
-//         resources: {
-//             dataSource: resources
-//         },
-//         resourceAssignments: {
-//             dataSource: resourceAssignments
-//         },
-//         validation: {
-//             autoUpdateParentTasks: true
-//         },
-//         loadPanel: {
-//             enabled: true
-//         },
-//         toolbar: {
-//             items: [
-//                 "undo",
-//                 "redo",
-//                 "separator",
-//                 "collapseAll",
-//                 "expandAll",
-//                 "separator",
-//                 "separator",
-//                 "zoomIn",
-//                 "zoomOut"
-//             ]
-//         },
-//         columns: [{
-//             dataField: "title",
-//             caption: "Название",
-//             width: 300
-//         }, {
-//             dataField: "start",
-//             caption: "Дата начала"
-//         }, {
-//             dataField: "end",
-//             caption: "Срок Исполнения"
-//         }],
-//         scaleType: "weeks",
-//         taskListWidth: 600
-//     });
-//     $(document.querySelectorAll('.dx-treelist-text-content').forEach(function(item){$(item).html($(item).text())}))
-// // })
-// });
-//
-// function getData(data, resourceAssignments, counter, tasks, parentId) {
-//     for (var item in data) {
-//         var now = new Date()
-//         var afterWeek = new Date()
-//         var startDate = now;
-//         var endDate = afterWeek;
-//         if (data[item].startDate == "" && data[item].endDate != "") {
-//             endDate.setTime(new Date(data[item].endDate))
-//             startDate.setTime(endDate.getTime() - 7)
-//         }
-//         if (data[item].startDate != "" && data[item].endDate != "") {
-//             endDate.setTime(new Date(data[item].endDate))
-//             startDate.setTime(new Date(data[item].startDate))
-//         }
-//         if (data[item].startDate != "" && data[item].endDate == "") {
-//             startDate.setTime(new Date(data[item].startDate))
-//             endDate.setTime(startDate.getTime() + 7)
-//         }
-//         afterWeek.setDate(afterWeek.getDate() + 7)
-//         if (tasks.length === 100)
-//             return [resourceAssignments, tasks]
-//         tasks.push({
-//             'id': data[item].id,
-//             'parentId': parentId,
-//             'title': data[item].title,
-//             'start': startDate,
-//             'end': endDate,
-//             'progress': data[item].progress ? "0" : data[item].progress
-//         })
-//         var resourceId = 7;
-//         if (data[item].status === "Открыто")
-//             resourceId = 1
-//         else if (data[item].status === "Закрыто")
-//             resourceId = 2
-//         else if (data[item].status === "В работе")
-//             resourceId = 3
-//         else if (data[item].status === "Блокировано")
-//             resourceId = 4
-//         else if (data[item].status === "На проверке")
-//             resourceId = 5
-//         else if (data[item].status === "Неактуально")
-//             resourceId = 6
-//
-//         resourceAssignments.push({
-//             'id': data[item].id,
-//             'taskId': data[item].id,
-//             'resourceId': resourceId
-//         })
-//         var creatingData = getData(data[item].childs, resourceAssignments, counter, tasks, data[item].id);
-//     }
-//     return creatingData
-// }
+    $("#gantt").dxGantt({
+        tasks: {
+            dataSource: tasks
+        },
+        resources: {
+            dataSource: resources
+        },
+        resourceAssignments: {
+            dataSource: resourceAssignments
+        },
+        validation: {
+            autoUpdateParentTasks: true
+        },
+        loadPanel: {
+            enabled: true
+        },
+        toolbar: {
+            items: [
+                "undo",
+                "redo",
+                "separator",
+                "collapseAll",
+                "expandAll",
+                "separator",
+                "separator",
+                "zoomIn",
+                "zoomOut"
+            ]
+        },
+        columns: [{
+            dataField: "title",
+            caption: "Название",
+            width: 300
+        }, {
+            dataField: "start",
+            caption: "Дата начала"
+        }, {
+            dataField: "end",
+            caption: "Срок Исполнения"
+        }],
+        scaleType: "weeks",
+        taskListWidth: 600
+    });
+    $(document.querySelectorAll('.dx-treelist-text-content').forEach(function(item){$(item).html($(item).text())}))
+// })
+});
+
+function getData(data, resourceAssignments, counter, tasks, parentId) {
+    for (var item in data) {
+        var now = new Date()
+        var afterWeek = new Date()
+        var startDate = now;
+        var endDate = afterWeek;
+        if (data[item].startDate == "" && data[item].endDate != "") {
+            endDate.setTime(new Date(data[item].endDate))
+            startDate.setTime(endDate.getTime() - 7)
+        }
+        if (data[item].startDate != "" && data[item].endDate != "") {
+            endDate.setTime(new Date(data[item].endDate))
+            startDate.setTime(new Date(data[item].startDate))
+        }
+        if (data[item].startDate != "" && data[item].endDate == "") {
+            startDate.setTime(new Date(data[item].startDate))
+            endDate.setTime(startDate.getTime() + 7)
+        }
+        afterWeek.setDate(afterWeek.getDate() + 7)
+        if (tasks.length === 100)
+            return [resourceAssignments, tasks]
+        tasks.push({
+            'id': data[item].id,
+            // 'parentId': parentId,
+            'parentId': data[item].parentId,
+            'title': data[item].title,
+            'start': startDate,
+            'end': endDate,
+            'progress': data[item].progress ? "0" : data[item].progress
+        })
+        var resourceId = 7;
+        if (data[item].status === "New")
+            resourceId = 1
+        else if (data[item].status === "Completed")
+            resourceId = 2
+        else if (data[item].status === "In progress")
+            resourceId = 3
+        else if (data[item].status === "")
+            resourceId = 4
+        else if (data[item].status === "На проверке")
+            resourceId = 5
+        else if (data[item].status === "Неактуально")
+            resourceId = 6
+
+        resourceAssignments.push({
+            'id': data[item].id,
+            'taskId': data[item].id,
+            'resourceId': resourceId
+        })
+        var creatingData = getData(data[item].childs, resourceAssignments, counter, tasks, data[item].id);
+    }
+    return creatingData
+}

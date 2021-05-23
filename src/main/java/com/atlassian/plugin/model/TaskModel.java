@@ -27,6 +27,9 @@ public class TaskModel {
     private String author;
     @XmlElement
     private Long parentId;
+    @XmlElement
+    private String progress;
+
 
     public TaskModel() {}
 //    public TaskModel(IssueField issueField) {
@@ -79,6 +82,10 @@ public class TaskModel {
         return parentId;
     }
 
+    public String getProgress() {
+        return progress;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -106,5 +113,9 @@ public class TaskModel {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
     }
 }

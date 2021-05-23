@@ -113,15 +113,15 @@ function fillTableForTasks(tasks) {
         }
     }).dxSelectBox("instance");
 
-    $("#notShowAttributes").dxCheckBox({
-        text: "Отключить показ атрибутов",
-        value: true,
-        onValueChanged: function (data) {
-                    dataGrid.clearFilter();
-                    dataGrid.option("filterRow.visible", data.value);
-                    applyFilterModeEditor.option("disabled", !data.value);
-                }
-    })
+    // $("#notShowAttributes").dxCheckBox({
+    //     text: "Отключить показ атрибутов",
+    //     value: true,
+    //     onValueChanged: function (data) {
+    //                 dataGrid.clearFilter();
+    //                 dataGrid.option("filterRow.visible", data.value);
+    //                 applyFilterModeEditor.option("disabled", !data.value);
+    //             }
+    // })
 
     // $("#filterRow").dxCheckBox({
     //     text: "Filter Row",

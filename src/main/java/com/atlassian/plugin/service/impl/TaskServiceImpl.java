@@ -92,7 +92,7 @@ public class TaskServiceImpl implements TaskService {
             if (issue.getDueDate() != null) { taskModel.setEnd(issue.getDueDate().toString()); }
             taskModel.setParentId(issue.getParentId());
             taskModel.setAuthor(issue.getReporter().getName());
-//            taskModel.setType(issue.getIssueType().getName());
+//            taskModel.setProgress(issue.getProgress());
             taskModels.add(taskModel);
         }
         return taskModels;
