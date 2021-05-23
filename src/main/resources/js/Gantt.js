@@ -1,5 +1,151 @@
-$(function() {
-    var gantt = $("#gantt").dxGantt({
+$(() => makeRequest())
+
+function makeRequest() {
+    jQuery.ajax(
+        {
+            dataType: "json",
+            type: 'get',
+            url: AJS.contextPath() + '/rest/gantt/1.0/task/getAllTasks',
+            async:false
+        }
+    ).done(function(data) {
+
+        // console.log(data)
+
+        const allData = getDataNormal(data, -1)
+
+        // console.log(allData)
+
+        $("#gantt").dxGantt({
+            tasks: {
+                dataSource: allData.tasks
+            },
+            resources: {
+                dataSource: resources
+            },
+            resourceAssignments: {
+                dataSource: allData.resourceAssignments
+            },
+            validation: {
+                autoUpdateParentTasks: true
+            },
+            loadPanel: {
+                enabled: true
+            },
+            toolbar: {
+                items: [
+                    "undo",
+                    "redo",
+                    "separator",
+                    "collapseAll",
+                    "expandAll",
+                    "separator",
+                    "separator",
+                    "zoomIn",
+                    "zoomOut"
+                ]
+            },
+            columns: [{
+                dataField: "title",
+                caption: "Название",
+                width: 300
+            }, {
+                dataField: "start",
+                caption: "Дата начала"
+            }, {
+                dataField: "end",
+                caption: "Срок Исполнения"
+            }],
+            scaleType: "weeks",
+            taskListWidth: 600
+        }).dxGantt("instance");
+
+        $(document.querySelectorAll('.dx-treelist-text-content').forEach(function(item){$(item).html($(item).text())}))
+// })
+    });
+}
+
+/**
+ author: "admin"
+ end: "2021-05-24 00:00:00.0"
+ id: 10000
+ start: "2021-05-23 15:06:56.0"
+ status: "In Progress"
+ title: "Запустить эту хрень"
+ */
+
+function getDataNormal(jsonArray, parentId) {
+    const tasks = []
+    const resourceAssignments = []
+
+    const resourcesMapping = {
+        'New': 1,
+        'Completed': 2,
+        'In progress': 3,
+        '': 4,
+        'На проверке': 5,
+        'Неактуально': 6,
+
+    }
+    for (const item of jsonArray) {
+        const now = new Date()
+        const afterWeek = new Date()
+        afterWeek.setDate(now + 7)
+
+        const safeDate = ((s) => {
+            try {
+                return new Date(s)
+            } catch (e) {
+                return new Date()
+            }
+        })
+
+        const start = safeDate(item.start)
+        const end = safeDate(item.end)
+        if (!start && end) {
+            start.setTime(end.getTime() - 7)
+        } else if (start && !end) {
+            end.setDate(start.getTime() + 7)
+        } else if (!start && !end) {
+            continue
+        }
+
+        tasks.push(
+            {
+                'id': item.id,
+                'parentId': item.parentId ? item.parentId : parentId,
+                'title': item.title ? item.title : '',
+                'start': start,
+                'end': end,
+                'progress': item.progress ? item.progress : 0
+            }
+        )
+
+        resourceAssignments.push(
+            {
+                'id': item.id,
+                'taskId': item.id,
+                'resourceId': resourcesMapping[item.status] ? resourcesMapping[item.status] : 7
+            }
+        )
+
+        if (item.childs) {
+            const childs = getData(item.childs, item.id)
+
+            tasks.push(childs.tasks)
+            resourceAssignments.push(childs.resourceAssignments)
+        }
+    }
+
+    return {
+        'tasks': tasks,
+        'resourceAssignments': resourceAssignments
+    }
+}
+
+
+/*$(function() {
+    const gantt = $("#gantt").dxGantt({
         taskTitlePosition: "outside",
         taskStatusPosition: "outside",
         taskAuthorPosition: "outside",
@@ -167,9 +313,10 @@ $(function() {
         return $customTooltip;
     }
 
-});
+});*/
 
-var tasks = [{
+var tasks = [
+    {
     'id': 1,
     'parentId': 0,
     'title': 'Software Development',
@@ -245,7 +392,8 @@ var tasks = [{
 //
 // }]
 
-var dependencies = [{
+var dependencies = [
+    {
     'id': 1,
     'predecessorId': 3,
     'successorId': 4,
@@ -297,7 +445,8 @@ var dependencies = [{
     'type': 0
 }]
 
-var resources = [{
+var resources = [
+    {
     'id': 1,
     'text': 'Открыто'
 }, {
@@ -323,7 +472,8 @@ var resources = [{
     'text': ''
 }]
 
-var resourceAssignments = [{
+var resourceAssignments = [
+    {
     'id': 0,
     'taskId': 3,
     'resourceId': 1
@@ -576,64 +726,7 @@ var resources = [{
     'text': ''
 }]
 
-jQuery.ajax({
-    dataType: "json",
-    type: 'get',
-    url: AJS.contextPath() + '/rest/gantt/1.0/task/getAllTasks',
-    async:false
-}).done(function(data){
-
-    var newData = getData(data.data, [], 0, [], -1)
-    var tasks = newData[1]
-    var resourceAssignments = newData[0]
-
-    $("#gantt").dxGantt({
-        tasks: {
-            dataSource: tasks
-        },
-        resources: {
-            dataSource: resources
-        },
-        resourceAssignments: {
-            dataSource: resourceAssignments
-        },
-        validation: {
-            autoUpdateParentTasks: true
-        },
-        loadPanel: {
-            enabled: true
-        },
-        toolbar: {
-            items: [
-                "undo",
-                "redo",
-                "separator",
-                "collapseAll",
-                "expandAll",
-                "separator",
-                "separator",
-                "zoomIn",
-                "zoomOut"
-            ]
-        },
-        columns: [{
-            dataField: "title",
-            caption: "Название",
-            width: 300
-        }, {
-            dataField: "start",
-            caption: "Дата начала"
-        }, {
-            dataField: "end",
-            caption: "Срок Исполнения"
-        }],
-        scaleType: "weeks",
-        taskListWidth: 600
-    });
-    $(document.querySelectorAll('.dx-treelist-text-content').forEach(function(item){$(item).html($(item).text())}))
-// })
-});
-
+/*
 function getData(data, resourceAssignments, counter, tasks, parentId) {
     for (var item in data) {
         var now = new Date()
@@ -664,6 +757,9 @@ function getData(data, resourceAssignments, counter, tasks, parentId) {
             'end': endDate,
             'progress': data[item].progress ? "0" : data[item].progress
         })
+
+        console.log(tasks[0])
+
         var resourceId = 7;
         if (data[item].status === "New")
             resourceId = 1
@@ -686,4 +782,4 @@ function getData(data, resourceAssignments, counter, tasks, parentId) {
         var creatingData = getData(data[item].childs, resourceAssignments, counter, tasks, data[item].id);
     }
     return creatingData
-}
+}*/

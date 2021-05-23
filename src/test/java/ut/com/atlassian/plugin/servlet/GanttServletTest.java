@@ -1,22 +1,14 @@
 package ut.com.atlassian.plugin.servlet;
 
-import org.junit.Test;
-import org.junit.After;
-import org.junit.Before;
-import org.mockito.Mockito;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class GanttServletTest {
 
     HttpServletRequest mockRequest;
     HttpServletResponse mockResponse;
 
-    @Before
+    /*@Before
     public void setup() {
         mockRequest = mock(HttpServletRequest.class);
         mockResponse = mock(HttpServletResponse.class);
@@ -33,5 +25,5 @@ public class GanttServletTest {
         when(mockRequest.getParameter(Mockito.anyString())).thenReturn(expected);
         assertEquals(expected,mockRequest.getParameter("some string"));
 
-    }
+    }*/
 }
